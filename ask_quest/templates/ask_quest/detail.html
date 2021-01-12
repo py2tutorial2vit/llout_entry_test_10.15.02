@@ -1,0 +1,24 @@
+{% extends "ask_quest/base.html" %}
+{% block content %}
+
+<h3>{{chapter_name}}</h3>
+
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+       <li><a href="{% url 'ask_quest:question'  question.id %}">{{ question.question_text }}</a></li>
+         
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Пока вопросов нет .</p>
+{% endif %}
+<p>цитата - это часть текста в статье, расположенное рядом местом возникновения вопроса(для облегчения поиска преподавателю)</p>
+<form method="POST">
+{% csrf_token %}
+<table>
+{{form}}
+</table>
+<input type="submit" value="Отправить вопрос!" >
+</form>
+{% endblock content %}
